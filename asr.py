@@ -15,9 +15,14 @@ class myWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.speak_btn.clicked.connect(partial(self.getCommand))
+        self.ui.test_btn.clicked.connect(partial(self.testCommand))
         self.score_threshold = 80
-        self.commands = {"open /Applications/WeChat.app": "play music", "open txt": "txt"}
-
+        self.commands = {
+            "open /Applications/WeChat.app": "open wechat", 
+            "open /Applications/QQ.app": "open qq",
+            "open /Applications/NeteaseMusic.app": "play music",
+            "open /Applications/Typora.app": "open typora",
+            }
         
     def recognize_speech_from_mic(self, recognizer, microphone):
         if not isinstance(recognizer, sr.Recognizer):
@@ -77,7 +82,7 @@ class myWindow(QtWidgets.QMainWindow):
     def getCommand(self):
         microphone = sr.Microphone()
         recognizer = sr.Recognizer()
-        for i in range(5):
+        for _ in range(5):
             order = self.recognize_speech_from_mic(recognizer, microphone)
             if order["transcription"]:
                 break
@@ -92,7 +97,24 @@ class myWindow(QtWidgets.QMainWindow):
         key, score, cmd = process.extractOne(self.myCommand, self.commands)
         print(key, score, cmd)
         self.showCommand()
-        
+
+    def testCommand(self):
+        recognizer = sr.Recognizer()
+        for i in range(5):
+            order = self.recognize_speech_from_audio(recognizer, "wav/index.wav")
+            if order["transcription"]:
+                break
+            if not order["success"]:
+                break
+            print("I didn't catch that. What did you say?\n")
+        if order["error"]:
+            print("ERROR: {}".format(order["error"]))
+            
+        print("You said: {}".format(order["transcription"]))
+        self.myCommand = order["transcription"]
+        key, score, cmd = process.extractOne(self.myCommand, self.commands)
+        print(key, score, cmd)
+        self.showCommand()
     
     def showCommand(self):
         showMessage = QtWidgets.QMessageBox()

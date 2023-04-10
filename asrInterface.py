@@ -63,26 +63,25 @@ class Ui_MainWindow(object):
         self.label_4.setStyleSheet("color: rgb(0, 117, 210);")
         self.label_4.setWordWrap(True)
         self.label_4.setObjectName("label_4")
+        # 用于语音识别的按钮
         self.speak_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.speak_btn.setGeometry(QtCore.QRect(70, 390, 201, 51))
+        self.speak_btn.setGeometry(QtCore.QRect(150, 390, 100, 51))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(14)
         self.speak_btn.setFont(font)
         self.speak_btn.setStyleSheet("color: rgb(0, 117, 210);")
         self.speak_btn.setObjectName("speak_btn")
-        
-        #
-        # self.test_btn = QtWidgets.QPushButton(self.centralwidget)
-        # self.test_btn.setGeometry(QtCore.QRect(70, 390, 201, 51))
-        # font = QtGui.QFont()
-        # font.setFamily("Calibri")
-        # font.setPointSize(14)
-        # self.test_btn.setFont(font)
-        # self.test_btn.setStyleSheet("color: rgb(0, 117, 210);")
-        # self.test_btn.setObjectName("test_btn")
-        #
-        
+        # 用于测试的按钮
+        self.test_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.test_btn.setGeometry(QtCore.QRect(50, 390, 50, 50))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(14)
+        self.test_btn.setFont(font)
+        self.test_btn.setStyleSheet("color: rgb(0, 117, 210);")
+        self.test_btn.setObjectName("test_btn")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -99,4 +98,4 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Hi! How can I help?"))
         self.label_4.setText(_translate("MainWindow", "2. Take some notes by saying \"Open Notepad\""))
         self.speak_btn.setText(_translate("MainWindow", "Start speaking"))
-        # self.test_btn.setText(_translate("MainWindow", "Test"))
+        self.test_btn.setText(_translate("MainWindow", "Test"))
