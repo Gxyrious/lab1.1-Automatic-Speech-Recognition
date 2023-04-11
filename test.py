@@ -3,7 +3,7 @@ import speech_recognition as sr
 
 # Working with audio files
 r = sr.Recognizer()
-speech = sr.AudioFile('audio.wav')
+speech = sr.AudioFile('./wav/index.wav')
 with speech as source:
     audio = r.record(source)
 print(r.recognize_sphinx(audio))
@@ -15,11 +15,11 @@ with mic as source:
     print("请开始讲话：")
     audio = r.listen(source)
     print("识别结果：")
-    text = r.recognize_sphinx(audio)
+    text = r.recognize_sphinx(audio, )
     print(text)
     
     # 保存录音文件
-    with wave.open("audio.wav", "wb") as f:
+    with wave.open("./wav/audio.wav", "wb") as f:
         f.setnchannels(1)
         f.setsampwidth(audio.sample_width)
         f.setframerate(audio.sample_rate)

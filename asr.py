@@ -16,13 +16,12 @@ class myWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.speak_btn.clicked.connect(partial(self.getCommand))
         self.ui.test_btn.clicked.connect(partial(self.testCommand))
-        self.score_threshold = 80
+        self.score_threshold = 60
         self.commands = {
-            "open /Applications/WeChat.app": "open wechat", 
-            "open /Applications/QQ.app": "open qq",
+            "open /Applications/IntelliJ\ IDEA.app": "coding", 
             "open /Applications/NeteaseMusic.app": "play music",
-            "open /Applications/Typora.app": "open typora",
-            }
+            "open /Applications/Steam.app": "play game",
+        }
         
     def recognize_speech_from_mic(self, recognizer, microphone):
         if not isinstance(recognizer, sr.Recognizer):
@@ -112,8 +111,6 @@ class myWindow(QtWidgets.QMainWindow):
             
         print("You said: {}".format(order["transcription"]))
         self.myCommand = order["transcription"]
-        key, score, cmd = process.extractOne(self.myCommand, self.commands)
-        print(key, score, cmd)
         self.showCommand()
     
     def showCommand(self):
